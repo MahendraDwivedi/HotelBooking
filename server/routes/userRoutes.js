@@ -5,6 +5,6 @@ import { getUserData, storeRecentSearchedCities } from "../controllers/userContr
 const userRouter = express.Router();
 
 userRouter.get('/',protect,getUserData);
-userRouter.push('/store-recent-search',protect,storeRecentSearchedCities)
+userRouter.post('/store-recent-search',protect,storeRecentSearchedCities);
 
 export default userRouter;
