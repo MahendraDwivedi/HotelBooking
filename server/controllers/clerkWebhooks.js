@@ -4,7 +4,8 @@ import { Webhook } from "svix";
 const clerkWebhooks = async (req, res) => {
   try {
     const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
-
+    console.log("hii clerk");
+    
     // GETTING HEADERS
     const headers = {
       "svix-id": req.headers["svix-id"],
@@ -19,7 +20,7 @@ const clerkWebhooks = async (req, res) => {
 
     const userData = {
         _id : data.id,
-        email:data.email_addresses[0].email_addresses,
+        email:data.email_addresses[0].email_address,
         username:data.first_name + " "+ data.last_name,
         image:data.image_url,
     }
@@ -29,6 +30,8 @@ const clerkWebhooks = async (req, res) => {
      switch (type) {
       case 'user.created': {
         await User.create(userData);
+        console.log("user created");
+        
         break;
       }
 
